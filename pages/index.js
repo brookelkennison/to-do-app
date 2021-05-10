@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import ToDos from './ToDos'
 
 export default function Home() {
   return (
@@ -14,6 +14,7 @@ export default function Home() {
         <h1 className={styles.title}>
           Brooke's To Do App
         </h1>
+        <ToDos /*items={items}*//>
       </main>
 
       <footer className={styles.footer}>
@@ -21,3 +22,5 @@ export default function Home() {
     </div>
   )
 }
+
+
