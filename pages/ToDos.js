@@ -1,13 +1,18 @@
 const { APP_URL } = process.env
- 
-function ToDos({items}) {
-    console.log(items)
-    return (
-      null
-    )
-  }
 
-export async function getServerSideProps() {
+function ToDos({ items }) {
+  return (
+    <ul>
+      {items.map((item) => (
+        <li>{item.id}</li>
+      ))}
+    </ul>
+  )
+}
+
+
+
+export async function getStaticProps() {
   const res = await fetch(`${APP_URL}/api/todo`)
   const items = await res.json()
 
@@ -19,8 +24,8 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      items
-    }, // will be passed to the page component as props
+      items,
+    }, 
   }
 }
 
