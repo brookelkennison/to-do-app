@@ -2,7 +2,9 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import ToDos from './ToDos'
 
-export default function Home() {
+import connectToDatabase from '../util/mongodb';
+
+function Home({data}) {
   return (
     <div>
       <Head>
@@ -14,7 +16,7 @@ export default function Home() {
         <h1 className={styles.title}>
           Brooke's To Do App
         </h1>
-        <ToDos />
+        <ToDos data={data}/>
       </main>
 
       <footer className={styles.footer}>
@@ -22,5 +24,28 @@ export default function Home() {
     </div>
   )
 }
+
+export async function getServerSideProps() {
+    const { db } = await connectToDatabase();
+    const data = await db
+      .collection("to-dos")
+      .find()
+      .sort({ metacritic: -1 })
+      .limit(20)
+      .toArray();
+    // console.log(data)
+    // JSON.parse(JSON.stringify(data))
+    return {
+      props: {
+        data: JSON.parse(JSON.stringify(data))
+      }
+    }
+  };
+ 
+
+export default Home
+
+
+
 
 

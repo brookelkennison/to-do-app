@@ -1,33 +1,12 @@
-const { APP_URL } = process.env
-
-function ToDos({ items }) {
+export default function ToDos(todo) {
+  const data = todo.data
   return (
-    <ul>
-      {items.map((item) => (
-        <li>{item.id}</li>
+    <ol>
+      {data.map((todo) => (
+        <li key={todo.item}>{todo.item}</li>
       ))}
-    </ul>
+    </ol>
   )
 }
 
-
-
-export async function getStaticProps() {
-  const res = await fetch(`${APP_URL}/api/todo`)
-  const items = await res.json()
-
-  if (!data) {
-    return {
-      notFound: true,
-    }
-  }
-
-  return {
-    props: {
-      items,
-    }, 
-  }
-}
-
-export default ToDos
 
