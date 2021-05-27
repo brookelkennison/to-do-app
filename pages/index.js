@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import ToDos from './ToDos'
+import CreateModal from '../components/CreateModal'
 
 import connectToDatabase from '../util/mongodb';
 
@@ -16,6 +17,8 @@ function Home({data}) {
         <h1 className={styles.title}>
           Brooke's To Do App
         </h1>
+        <button>Add Item</button>
+        <CreateModal />
         <ToDos data={data}/>
       </main>
 
@@ -33,8 +36,7 @@ export async function getServerSideProps() {
       .sort({ metacritic: -1 })
       .limit(20)
       .toArray();
-    // console.log(data)
-    // JSON.parse(JSON.stringify(data))
+
     return {
       props: {
         data: JSON.parse(JSON.stringify(data))
