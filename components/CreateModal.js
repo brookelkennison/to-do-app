@@ -1,8 +1,6 @@
 export default function CreateModal() {
     const createTodo = async event => {
-        console.log(event)
       event.preventDefault()
-  
       const res = await fetch(
         '/api/todo',
         {
